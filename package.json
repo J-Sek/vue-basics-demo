@@ -1,0 +1,13 @@
+{
+  "name": "vue-demo",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.0"
+  },
+  "scripts": {
+    "start": "live-server",
+    "next": "git checkout -f $(git rev-list --topo-order HEAD..master | tail -1)",
+    "prev": "git checkout -f HEAD~"
+  }
+}
