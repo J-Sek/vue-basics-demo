@@ -1,0 +1,16 @@
+{
+  "name": "vue-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "live-server",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open",
+    "next": "git reset --hard && git checkout $(git rev-list --topo-order HEAD..master | tail -1)",
+    "prev": "git reset --hard && git checkout HEAD~"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cypress": "^2.1.0",
+    "live-server": "^1.2.0"
+  }
+}
