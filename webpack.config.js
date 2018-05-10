@@ -2,6 +2,18 @@ const path = require('path')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
+const scssLoaders = [
+  'vue-style-loader',
+  {
+    loader: 'css-loader',
+    options: { importLoaders: 1 }
+  },
+  {
+    loader: 'postcss-loader',
+    options: { parser: 'postcss-scss', plugins: [ require('precss') ] }
+  }
+];
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -13,22 +25,24 @@ module.exports = {
     new VueLoaderPlugin()
   ],
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.css$/,
         use: [
           'vue-style-loader',
           'css-loader'
-        ],
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: scssLoaders
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
           loaders: {
-            
-          }
-          // other vue-loader options go here
+            'scss': scssLoaders,
+          },
         }
       },
       {

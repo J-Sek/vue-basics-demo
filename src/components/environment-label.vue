@@ -21,12 +21,15 @@ export default {
 <style scoped>
 .env-label {
     color: #fff;
-    font-size: .9em;
     padding: .4rem .8rem;
     border-radius: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-align: center;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    z-index: 1;
 }
 .dev  { background: #00bfa5; }
 .prod { background: #8c30a8; }
