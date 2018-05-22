@@ -64,15 +64,7 @@
                     </md-list-item>
                 </md-list>
 
-                <pre class="with-vertical-line">
-66af7b2 Use vue-mate<span class="overflow">rial</span>
-4a7a3e1 [3] Result
-e687a9e [3] Instruct<span class="overflow">ions</span>
-262cea0 [2] Result
-dfb6132 [2] Instruct<span class="overflow">ions</span>
-7634b04 [1] Result
-58efb53 [1] Instruct<span class="overflow">ions</span>
-7a4e92f Initial empt<span class="overflow">y commit</span></pre>
+                <pre class="commits-validation with-vertical-line" v-html="commits"></pre>
 
                 <div class="loading-overlay" v-if="loading">
                     <md-progress-spinner md-mode="indeterminate" :md-stroke="2"></md-progress-spinner>
@@ -120,6 +112,39 @@ export default {
 
       matchedAuthors: [{ name: 'Czarniecki, Jacek', email: 'jacek.czarniecki@ihsmarkit.com' }],
 
+      commits: [
+            'FIRE FIRE FIRE',
+            'DE71724: Fix missing filtering by region in IHS Events widget duplicates (for Construction and Consumer Markets) + Fix widget visibility when there are no results',
+            'DE71055: Fix export dialog for Transaction/SEAM Viewer',
+            'DE70850: Prevent Null Exception by filtering ghosts first',
+            '[DE70415]: Fix JavaScript exception when user has no access to historical series',
+            '[DE69499] Optimize perceived performance of Cost Analyzer page loading - use lazy load for nested nodes',
+            '[US123763] [Cost Analyzer] Fix missing nodes in Geographical grouping if have multiple parents',
+            '[US123763] [CostAnalyzer] Pass current banksGroup when calling for timeseries',
+            '[US123763] Grouping series navigators trees in Cost Analyzer',
+            'Integration Tests HotFix JSLINT error in ServerUrls',
+            ' [DE67437] We should not care about entitlements when feching series subscriptions to cache',
+            'JsCoverage cleanup now extracted to separate repo + fix karma stability (longer timeout for slower machines) + include new Scripts/ subdirectories',
+            '[US135871] Fix missing compass for SassWatch',
+            'Buildfix',
+            '[US135871] Add caching and resolving @import hierarchy while building styles + fix invalid calls whileunpacking node_modules + cleanup obsolete StyleGuide articles',
+            '[US119613] [Cost Analyzer] Sort serie selection box',
+            '[DE65495] Custom visibility provider to make GlobalEventsWidget visible on CountryRisk dashboard',
+            '[US138271] Better modularity for test report scripts',
+            '[US137791] Different strategy of retriving project id from URL',
+            '[US137791] Hotfix path in powershell',
+            'Build fix after merge',
+        ].map(x => {
+            const part1 = x.substr(0,70);
+            const part2 = x.substr(70);
+            return part1
+                + (part2 ? `<span class="overflow">${part2}</span>` : '')
+                + (/(WIP|FIRE FIRE FIRE)/.test(x) ? `<i class="material-icons mood-indicator">block</i>`
+                : (!/(US|DE)[1-9]\d+/i.test(x) ? `<i class="material-icons mood-indicator">warning</i>`
+                : (part2.includes(' ') ? `<i class="material-icons mood-indicator">thumb_down_alt</i>` : '')
+                ));
+        })
+        .join('\n'),
         // find those where 
       pullRequests: [
           { id: 12345,
@@ -241,17 +266,40 @@ export default {
     &:after {
         content: '';
         display: block;
-        width: calc(100% - 20ch - 2px);
+        width: calc(100% - 71ch - 2em - 2px);
         height: 100%;
         background: rgba(255,255,255,.1);
         position: absolute;
         top: 0;
-        left: calc(20ch + 2px);
+        left: calc(71ch + 2em + 2px);
     }
 }
 
 .overflow {
-    background: rgb(139, 33, 33);
+    background: rgb(159, 33, 33);
+    box-shadow: 0 0 2px rgba(0,0,0,.5);z
     padding-right: .5ch;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 2em - 71ch);
+
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+
+    line-height: 18px;
+    margin: 1px 0;
+}
+
+.mood-indicator {
+    position: absolute;
+    right: 1.3em;
+    font-size: 1.15em;
+    margin-top: 2px;
+}
+
+.commits-validation {
+    border: 1px solid;
+    padding: 2em;
 }
 </style>

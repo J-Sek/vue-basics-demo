@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const scssLoaders = [
@@ -15,14 +16,29 @@ const scssLoaders = [
 ];
 
 module.exports = {
-  entry: './src/main.js',
+  // entry: './src/main.js',
+  entry: {
+    app: './src/main.js',
+    // vendor: ['vue'],
+    // material: ['vue-material']
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js'
+    filename: '[name].js'
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: "vendor",
+  //   // filename: "vendor.js"
+  //   // (Give the chunk a different name)
+
+  //   minChunks: Infinity,
+  //   // (with more entries, this ensures that no other module
+  //   //  goes into the vendor chunk)
+  // })
   ],
   module: {
     rules: [{
@@ -68,7 +84,37 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  optimization: {
+    minimizer: [new UglifyJsPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: true
+          })],
+
+  splitChunks: {
+    chunks: "initial",
+    // minSize: 30000,
+    minChunks: 1,
+    cacheGroups: {
+    material: {
+      test: /[\\/]vue-material[\\/]/,
+      priority: -9,
+      name: 'material'
+  },
+      vendor: {
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10,
+        name: 'vendor'
+    },
+      default: {
+        minChunks: 3,
+        priority: -20,
+        reuseExistingChunk: true
+      }
+    }
+  },
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
