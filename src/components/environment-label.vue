@@ -1,6 +1,6 @@
-<template>
-    <p v-if='isLocal' class="env-label dev">Localhost</p>
-    <p v-else class="env-label prod">Hostname: {{ hostname }}</p>
+<template lang="pug">
+    p.env-label.dev(v-if='isLocal') Localhost
+    p.env-label.prod(v-else) Hostname: {{ hostname }}
 </template>
 
 <script>

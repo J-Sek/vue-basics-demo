@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-new Vue({
+const app = new Vue({
   el: '#app',
-  components: { App },
-  template: '<App/>'
+  render: h => h(App)
 })
 
 Vue.config.devtools = true;
