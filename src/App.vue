@@ -1,14 +1,13 @@
 <template>
-    <div id="app" v-cloak>
+    <main v-cloak>
         <environment-label></environment-label>
         <h1>{{ title }}</h1>
-    </div>
+    </main>
 </template>
 
 <script>
 import EnvironmentLabel from './components/environment-label'
 export default {
-    name: 'app',
     data() {
         return {
             title: 'Hello Vue.js + Webpack'
@@ -22,4 +21,7 @@ export default {
 
 <style>
     [v-cloak] { display: none }
+    body {
+        font-family: Ubuntu, 'Segoe UI', Arial, Helvetica, sans-serif;
+    }
 </style>

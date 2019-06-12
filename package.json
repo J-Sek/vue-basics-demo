@@ -3,21 +3,21 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "live-server",
+    "start": "live-server dist",
     "next": "git next",
     "prev": "git prev",
     "dev": "parcel index.html",
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "live-server": "^1.2.0",
-    "vue": "^2.5.16",
-    "vue-hot-reload-api": "^2.3.0"
+    "live-server": "^1.2.1",
+    "vue": "^2.6.10",
+    "vue-hot-reload-api": "^2.3.3"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "^1.3.0",
-    "parcel-bundler": "^1.10.3",
+    "@vue/component-compiler-utils": "^3.0.0",
+    "parcel-bundler": "^1.12.3",
     "pug": "^2.0.3",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.6.10"
   }
 }
